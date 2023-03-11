@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
 public enum Genre {
+    ALL,
     ACTION,
     ADVENTURE,
     ANIMATION,
@@ -21,6 +22,7 @@ public enum Genre {
     THRILLER,
     WAR,
     WESTERN,
+
 
 
 }
