@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -70,23 +71,27 @@ public class HomeController implements Initializable {
 
         });
 
-        searchBtn.setOnAction(actionEvent -> {
+   /*     searchBtn.setOnAction(actionEvent -> {
             Genre selectedGenre = genreComboBox.getValue();
             if (selectedGenre != null) {
-                // filter observableMovies based on selected genre
-                ObservableList<Movie> filteredMovies = observableMovies.filtered(movie -> movie.getGenres().contains(selectedGenre));
-                movieListView.setItems(filteredMovies);  // update list view with filtered data
+
+                if (selectedGenre == Genre.ALL) {
+                    observableMovies.clear(); // clear observable list
+                    observableMovies.addAll(allMovies); // add all movies to observable list
+                } else {
+                    // filter observableMovies based on selected genre
+                    ObservableList<Movie> filteredMovies = observableMovies.filtered(movie -> movie.getGenres().contains(selectedGenre));
+                    movieListView.setItems(filteredMovies);  // update list view with filtered data
+                }
+
             } else {
                 // reset list view with all movies when no genre is selected
                 movieListView.setItems(observableMovies);
             }
-        });
-        searchBtn.setOnAction(actionEvent -> {
-            Genre selectedGenre = genreComboBox.getValue();
-            if (selectedGenre == Genre.ALL || selectedGenre == Genre.NO_FILTER ) {
-                ObservableList<Movie> filteredMovies = observableMovies.filtered(movie -> movie.getGenres().contains(allMovies));
-                movieListView.setItems(filteredMovies);  // update list view with filtered data
-            }
+        });*/
+       // searchBtn.setOnAction(actionEvent -> {
+         //   Genre selectedGenre = genreComboBox.getValue();
+
             //if (selectedGenre == Genre.NO_FILTER) {
                 //ObservableList<Movie>  = observableMovies.filtered(movie -> movie.getGenres().contains(allMovies));
                // movieListView.setItems(filteredMovies);  // update list view with filtered data
@@ -99,7 +104,7 @@ public class HomeController implements Initializable {
 
 
 
-        });
+     //   });
 
 
         // Filter button
@@ -116,9 +121,15 @@ public class HomeController implements Initializable {
                 } else {
                     // search term entered
                     observableMovies.clear(); // clear observable list
+                    List<String> movieNames = new ArrayList<String>() ;
                     for(Movie movie : allMovies) {
                         if(movie.getTitle().toLowerCase().contains(searchTerm) || movie.getDescription().toLowerCase().contains(searchTerm)) {
-                            observableMovies.add(movie); // add movie to observable list if it contains the search term
+                            String movieName = movie.getTitle();
+                            if (!movieNames.contains(movieName)) {
+                                movieNames.add(movieName);
+                                observableMovies.add(movie);
+                                // remove duplicate movies
+                            }
                         }
                     }
                 }
@@ -138,21 +149,25 @@ public class HomeController implements Initializable {
                 } else {
                     // search term entered
                     observableMovies.clear(); // clear observable list
+
+                    List<String> movieNames = new ArrayList<String>() ;
                     for(Movie movie : allMovies) {
-                        if(movie.getGenres().contains(selectedGenre) && (movie.getTitle().toLowerCase().contains(searchTerm) || movie.getDescription().toLowerCase().contains(searchTerm))) {
-                            observableMovies.add(movie); // add movie to observable list if it contains the selected genre and the search term
+                        if (movie.getGenres().contains(selectedGenre) && (movie.getTitle().toLowerCase().contains(searchTerm) || movie.getDescription().toLowerCase().contains(searchTerm)))  {
+                            String movieName = movie.getTitle();
+                            if (!movieNames.contains(movieName)) {
+                                movieNames.add(movieName);
+                                observableMovies.add(movie);
+                                // remove duplicate movies
+                            }
                         }
                     }
+
                 }
             }
         });
 
 
 
-
-        //searchBtn.setOnAction(actionEvent -> {
-          //  if
-             //   });
 
 
 
