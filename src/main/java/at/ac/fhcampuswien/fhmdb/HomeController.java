@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -28,6 +29,7 @@ public class HomeController implements Initializable {
 
     @FXML
     public JFXComboBox <Genre> genreComboBox;
+
 
     @FXML
     public JFXButton sortBtn;
@@ -47,6 +49,8 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.getItems().addAll(Genre.values());
+
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
@@ -61,6 +65,7 @@ public class HomeController implements Initializable {
                 sortBtn.setText("Sort (asc)");
             }
         });
+
 
 
     }
