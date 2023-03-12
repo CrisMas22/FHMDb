@@ -25,8 +25,6 @@ public class HomeController implements Initializable {
     @FXML
     public TextField searchField;
 
-    @FXML
-    public Button resetBtn;
 
     @FXML
     public JFXListView<Movie> movieListView;
@@ -150,97 +148,3 @@ public class HomeController implements Initializable {
 
 
 }
-
-
-
-
-
-    /*    // searchBtn.setOnAction(actionEvent -> {
-        //   Genre selectedGenre = genreComboBox.getValue();
-
-        //if (selectedGenre == Genre.NO_FILTER) {
-        //ObservableList<Movie>  = observableMovies.filtered(movie -> movie.getGenres().contains(allMovies));
-        // movieListView.setItems(filteredMovies);  // update list view with filtered data
-        // observableMovies.clear(); // clear observable list
-        // observableMovies.addAll(allMovies); // add all movies to observable list
-        // }
-        // else if (selectedGenre == null || searchBtn== null){
-        // observableMovies.addAll(allMovies); // add all movies to observable list
-        //}
-
-
-
-        //   });
-
-
-        // Filter button
-        searchBtn.setOnAction(actionEvent -> {
-            String searchTerm = searchField.getText().toLowerCase();
-            // convert search term to lower case for case-insensitive search
-
-            if(genreComboBox.getSelectionModel().getSelectedItem() == null || genreComboBox.getSelectionModel().getSelectedItem() == Genre.ALL) {
-                // no genre filter selected
-                if(searchTerm.isEmpty()) {
-                    // no search term entered
-                    observableMovies.clear(); // clear observable list
-                    observableMovies.addAll(allMovies); // add all movies to observable list
-                } else {
-                    // search term entered
-                    observableMovies.clear(); // clear observable list
-                    List<String> movieNames = new ArrayList<String>() ;
-                    for(Movie movie : allMovies) {
-                        if(movie.getTitle().toLowerCase().contains(searchTerm) || movie.getDescription().toLowerCase().contains(searchTerm)) {
-                            String movieName = movie.getTitle();
-                            if (!movieNames.contains(movieName)) {
-                                movieNames.add(movieName);
-                                observableMovies.add(movie);
-                                // remove duplicate movies
-                            }
-                        }
-                    }
-                }
-            } else {
-                // genre filter selected
-                Genre selectedGenre = genreComboBox.getSelectionModel().getSelectedItem();
-
-                if(searchTerm.isEmpty()) {
-                    // no search term entered
-                    observableMovies.clear(); // clear observable list
-                    for(Movie movie : allMovies) {
-                        if(movie.getGenres().contains(selectedGenre)) {
-                            observableMovies.add(movie); // add movie to observable list if it contains the selected genre
-                        }
-                    }
-
-                } else {
-                    // search term entered
-                    observableMovies.clear(); // clear observable list
-
-                    List<String> movieNames = new ArrayList<String>() ;
-                    for(Movie movie : allMovies) {
-                        if (movie.getGenres().contains(selectedGenre) && (movie.getTitle().toLowerCase().contains(searchTerm) || movie.getDescription().toLowerCase().contains(searchTerm)))  {
-                            String movieName = movie.getTitle();
-                            if (!movieNames.contains(movieName)) {
-                                movieNames.add(movieName);
-                                observableMovies.add(movie);
-                                // remove duplicate movies
-                            }
-                        }
-                    }
-
-                }
-            }
-        });
-
-
-
-
-
-
-
-
-
-    }
-}
-
-     */
