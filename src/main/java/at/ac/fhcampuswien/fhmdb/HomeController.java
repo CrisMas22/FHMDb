@@ -78,6 +78,23 @@ public class HomeController implements Initializable {
             genreFilter(allMovies, genreComboBox.getValue().toString());
             searchRequest(moviesByGenre, searchField.getText().toLowerCase());
             sortMovies(moviesByGenre, sortBtn.getText());
+
+            Genre selectedGenre = genreComboBox.getValue();
+            if (selectedGenre != null) {
+
+                if (selectedGenre == Genre.ALL) {
+                    observableMovies.clear(); // clear observable list
+                    observableMovies.addAll(allMovies); // add all movies to observable list
+                } else {
+                    // filter observableMovies based on selected genre
+                    ObservableList<Movie> filteredMovies = observableMovies.filtered(movie -> movie.getGenres().contains(selectedGenre));
+                    movieListView.setItems(filteredMovies);  // update list view with filtered data
+                }
+
+            } else {
+                // reset list view with all movies when no genre is selected
+                movieListView.setItems(observableMovies);
+            }
         });
 
 
@@ -99,6 +116,8 @@ public class HomeController implements Initializable {
 
         return moviesByGenre;
     }
+
+
 
     public ObservableList<Movie> sortMovies(ObservableList<Movie> observableMovies, String sortBtnText) {
 
@@ -128,6 +147,7 @@ public class HomeController implements Initializable {
         }
         return movieList;
     }
+
 
 }
 
