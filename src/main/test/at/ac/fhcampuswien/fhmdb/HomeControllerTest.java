@@ -11,6 +11,35 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HomeControllerTest {
+
+
+    @Test
+    public void test_All_Movies_Shown_Without_Filter() {
+
+        HomeController homeController = new HomeController();
+        List <Movie> movieList = new ArrayList<>();
+        List<Movie> movieList1;
+
+        // Given
+        Movie movie1 = new Movie("Movie 1", "description1", List.of(Genre.ADVENTURE));
+        Movie movie2 = new Movie("Movie 2", "description2", List.of(Genre.DRAMA));
+        Movie movie3 = new Movie("Movie 3", "description3", List.of(Genre.DRAMA));
+        Movie movie4 = new Movie("Movie 4", "description3", List.of(Genre.CRIME));
+        movieList.add(movie1);
+        movieList.add(movie2);
+        movieList.add(movie3);
+        movieList.add(movie4);
+
+
+        // When
+        movieList1 = homeController.genreFilter(movieList, "ALL");
+
+        // Then
+        List<Movie> allMovies = Movie.initializeMovies();
+        assertTrue(allMovies.containsAll(allMovies));
+
+
+    }
     @Test
     // testing if the movies and genres match correctly
     void just_the_matching_movies_and_Genre_are_shown(){
@@ -98,7 +127,7 @@ class HomeControllerTest {
         assertEquals(expected, actual);
     }
     @Test
-    //testing if the sort button can dort the movies descending
+    //testing if the sort button can dort the movies descebding
     void when_sortButton_asc_movie_list_sorted_des(){
         // GIVEN
         HomeController homeController = new HomeController();
