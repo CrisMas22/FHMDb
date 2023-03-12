@@ -97,4 +97,33 @@ class HomeControllerTest {
         //test
         assertEquals(anticipatedMovies, current);
     }
+    @Test
+    void show_corresponding_movies_when_genreFilter_and_searchRequest_used(){
+        // GIVEN
+        HomeController homeController = new HomeController();
+        List <Movie> movieList = new ArrayList<>();
+        List<Movie> movieList1;
+        List<Movie> movieList2;
+
+        Movie movie1 = new Movie("Movie 1", "description1", List.of(Genre.COMEDY));
+        Movie movie2 = new Movie("Movie 2", "description2", List.of(Genre.ADVENTURE));
+        Movie movie3 = new Movie("Movie 3", "description3", List.of(Genre.SPORT));
+        Movie movie4 = new Movie("Movie 4", "description4", List.of(Genre.DRAMA));
+
+        movieList.add(movie1);
+        movieList.add(movie2);
+        movieList.add(movie3);
+        movieList.add(movie4);
+
+        // WHEN
+        movieList1 = homeController.searchRequest(movieList, "description3");
+        movieList2 = homeController.genreFilter(movieList1, "SPORT");
+
+
+        // THEN
+        List<Movie> CMovies = new ArrayList<>();
+        CMovies.add(movie3);
+
+        assertEquals(CMovies, movieList2);
+    }
 }
