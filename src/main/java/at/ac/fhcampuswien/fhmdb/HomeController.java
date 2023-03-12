@@ -2,15 +2,12 @@ package at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
-import at.ac.fhcampuswien.fhmdb.models.SortState;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -39,12 +36,10 @@ public class HomeController implements Initializable {
     @FXML
     public JFXButton sortBtn;
 
-
     public List<Movie> allMovies = Movie.initializeMovies();
 
-    final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
+    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
-    public SortState sortState = SortState.NONE;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,7 +59,7 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if (sortBtn.getText().equals("Sort (asc)")) {
+            if(sortBtn.getText().equals("Sort (asc)")) {
                 // TODO sort observableMovies ascending
                 sortBtn.setText("Sort (desc)");
                 observableMovies.sort(Comparator.comparing(Movie::getTitle));
@@ -75,19 +70,6 @@ public class HomeController implements Initializable {
             }
 
         });
-
-    }
-    public void initializeState(){      //from here until the end I don't have it
-        observableMovies.clear();
-        observableMovies.addAll(allMovies);
-    }
-
-    public void sortMovies(){
-        observableMovies.sort(Comparator.comparing(Movie::getTitle));
-        sortState = SortState.ASCENDING;
-    }
-
-
 
    /*     searchBtn.setOnAction(actionEvent -> {
             Genre selectedGenre = genreComboBox.getValue();
@@ -107,28 +89,26 @@ public class HomeController implements Initializable {
                 movieListView.setItems(observableMovies);
             }
         });*/
-       // searchBtn.setOnAction(actionEvent -> {
-         //   Genre selectedGenre = genreComboBox.getValue();
+        // searchBtn.setOnAction(actionEvent -> {
+        //   Genre selectedGenre = genreComboBox.getValue();
 
-            //if (selectedGenre == Genre.NO_FILTER) {
-                //ObservableList<Movie>  = observableMovies.filtered(movie -> movie.getGenres().contains(allMovies));
-               // movieListView.setItems(filteredMovies);  // update list view with filtered data
-               // observableMovies.clear(); // clear observable list
-               // observableMovies.addAll(allMovies); // add all movies to observable list
-           // }
-           // else if (selectedGenre == null || searchBtn== null){
-               // observableMovies.addAll(allMovies); // add all movies to observable list
-            //}
+        //if (selectedGenre == Genre.NO_FILTER) {
+        //ObservableList<Movie>  = observableMovies.filtered(movie -> movie.getGenres().contains(allMovies));
+        // movieListView.setItems(filteredMovies);  // update list view with filtered data
+        // observableMovies.clear(); // clear observable list
+        // observableMovies.addAll(allMovies); // add all movies to observable list
+        // }
+        // else if (selectedGenre == null || searchBtn== null){
+        // observableMovies.addAll(allMovies); // add all movies to observable list
+        //}
 
 
 
-     //   });
+        //   });
 
 
         // Filter button
         searchBtn.setOnAction(actionEvent -> {
-            searchField.setText("Search");
-
             String searchTerm = searchField.getText().toLowerCase();
             // convert search term to lower case for case-insensitive search
 
@@ -184,7 +164,7 @@ public class HomeController implements Initializable {
 
                 }
             }
-        };
+        });
 
 
 
@@ -195,3 +175,4 @@ public class HomeController implements Initializable {
 
 
     }
+}
