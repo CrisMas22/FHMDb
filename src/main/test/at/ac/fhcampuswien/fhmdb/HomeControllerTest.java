@@ -72,6 +72,33 @@ class HomeControllerTest {
         assertEquals(expectedMovies, currentMovieList);
     }
     @Test
+    // testing if the sort button can sort the movies ascending
+    void when_sort_button_desc_movie_list_sorted_asc(){
+        // GIVEN
+        HomeController homeController = new HomeController();
+
+        ObservableList<Movie> exampleMovies = FXCollections.observableArrayList();
+        Movie movie1 = new Movie("a-Movie1", "description1", List.of(Genre.DOCUMENTARY));
+        Movie movie2 = new Movie("c-Movie2", "description2", List.of(Genre.SCIENCE_FICTION));
+        Movie movie3 = new Movie("b-Movie3", "description3", List.of(Genre.WESTERN));
+        exampleMovies.add(movie1);
+        exampleMovies.add(movie2);
+        exampleMovies.add(movie3);
+
+        // WHEN
+        ObservableList<Movie> actual = homeController.sortMovies(exampleMovies, "Sort (asc)");
+
+        // THEN
+
+        ObservableList<Movie> expected = FXCollections.observableArrayList();
+        expected.add(movie1);
+        expected.add(movie3);
+        expected.add(movie2);
+        //test
+        assertEquals(expected, actual);
+    }
+    @Test
+    //testing if the sort button can dort the movies descebding
     void when_sortButton_asc_movie_list_sorted_des(){
         // GIVEN
         HomeController homeController = new HomeController();
@@ -98,6 +125,7 @@ class HomeControllerTest {
         assertEquals(anticipatedMovies, current);
     }
     @Test
+    //testing if the filter function can show the correct results base on genre
     void show_corresponding_movies_when_genreFilter_and_searchRequest_used(){
         // GIVEN
         HomeController homeController = new HomeController();
