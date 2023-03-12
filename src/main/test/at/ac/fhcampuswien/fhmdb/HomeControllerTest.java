@@ -2,6 +2,8 @@ package at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,5 +70,31 @@ class HomeControllerTest {
         expectedMovies.add(movie3);
 
         assertEquals(expectedMovies, currentMovieList);
+    }
+    @Test
+    void when_sortButton_asc_movie_list_sorted_des(){
+        // GIVEN
+        HomeController homeController = new HomeController();
+
+
+        ObservableList<Movie> observableList = FXCollections.observableArrayList();
+        Movie movie1 = new Movie("a-Movie1", "description1", List.of(Genre.WAR));
+        Movie movie2 = new Movie("c-Movie2", "description2", List.of(Genre.BIOGRAPHY));
+        Movie movie3 = new Movie("b-Movie3", "description3", List.of(Genre.ADVENTURE));
+        observableList.add(movie1);
+        observableList.add(movie2);
+        observableList.add(movie3);
+
+        // WHEN
+        ObservableList<Movie> current = homeController.sortMovies(observableList, "Sort (desc)"); //current
+
+        // THEN
+
+        ObservableList<Movie> anticipatedMovies = FXCollections.observableArrayList();
+        anticipatedMovies.add(movie2);
+        anticipatedMovies.add(movie3);
+        anticipatedMovies.add(movie1);
+        //test
+        assertEquals(anticipatedMovies, current);
     }
 }
