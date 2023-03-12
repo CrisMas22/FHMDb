@@ -152,11 +152,6 @@ public class Movie {
                 "A documentary based on how hand signals came about in baseball. Who initiated them and their usefulness.",
                 Arrays.asList(Genre.DOCUMENTARY, Genre.MYSTERY, Genre.SPORT)
         ));
-        movies.add(new Movie(
-                "Minions",
-                "",
-                Arrays.asList(Genre.ROMANCE, Genre.DRAMA)
-        ));
 
 
         return movies;
