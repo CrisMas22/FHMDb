@@ -98,7 +98,7 @@ class HomeControllerTest {
         assertEquals(expected, actual);
     }
     @Test
-    //testing if the sort button can dort the movies descebding
+    //testing if the sort button can dort the movies descending
     void when_sortButton_asc_movie_list_sorted_des(){
         // GIVEN
         HomeController homeController = new HomeController();
