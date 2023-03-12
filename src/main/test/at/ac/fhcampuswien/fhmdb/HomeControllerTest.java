@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HomeControllerTest {
     @Test
+    // testing if the movies and genres match correctly
     void just_the_matching_movies_and_Genre_are_shown(){
         // GIVEN
 
@@ -38,5 +39,34 @@ class HomeControllerTest {
 
         assertEquals(requestedMovie, movieList1);
 
+    }
+    @Test
+    //testing if the search function shows the correct results
+    void just_movies_are_shown_that_have_the_words_that_are_searched(){
+
+        // GIVEN
+        HomeController homeController = new HomeController();
+        List <Movie> movieArrayList = new ArrayList<>();
+        List<Movie> currentMovieList;
+
+        Movie movie1 = new Movie("Movie 1", "description1", List.of(Genre.MUSICAL));
+        Movie movie2 = new Movie("Movie 2", "description32", List.of(Genre.MYSTERY));
+        Movie movie3 = new Movie("Movie 3", "description3", List.of(Genre.DOCUMENTARY));
+        movieArrayList.add(movie1);
+        movieArrayList.add(movie2);
+        movieArrayList.add(movie3);
+
+
+        // WHEN
+        currentMovieList = homeController.searchRequest(movieArrayList, "description3");
+
+
+        // THEN
+
+        List<Movie> expectedMovies = new ArrayList<>();
+        expectedMovies.add(movie2);
+        expectedMovies.add(movie3);
+
+        assertEquals(expectedMovies, currentMovieList);
     }
 }
